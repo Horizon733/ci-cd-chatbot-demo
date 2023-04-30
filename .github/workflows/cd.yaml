@@ -21,8 +21,6 @@ jobs:
 
     - name: "Activate Namespace"
       uses: okteto/namespace@latest
-      with:
-        name: horizon733
 
     - name: "Trigger the pipeline"
       uses: okteto/pipeline@latest
