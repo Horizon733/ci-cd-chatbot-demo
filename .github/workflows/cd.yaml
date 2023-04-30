@@ -1,0 +1,33 @@
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+
+name: deployment
+
+jobs:
+  devflow:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+
+    - name: context
+      uses: okteto/context@latest
+      with:
+        token: ${{ secrets.OKTETO_TOKEN }}
+
+    - name: "Activate Namespace"
+      uses: okteto/namespace@latest
+      with:
+        name: horizon733
+
+    - name: "Trigger the pipeline"
+      uses: okteto/pipeline@latest
+      with:
+        name: pr-${{ github.event.number }}
+        timeout: 8m
+        skipIfExists: true
+        filename: docker-compose.yml
