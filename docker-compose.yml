@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     command: bash -c "rasa run --enable-api --cors \"*\" --debug"
     ports:
-      - 5005:5005
+      - 8080:5005
   actions_server:
     image: rasa_assistant:latest
     build:
