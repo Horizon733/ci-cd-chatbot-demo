@@ -9,4 +9,4 @@ RUN pip install rasa
 
 COPY . .
 
-EXPOSE 5005
+EXPOSE 8080
