@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  rasa_assistant:
+    image: rasa_assistant:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: bash -c "rasa run --enable-api --cors \"*\" --debug"
+    ports:
+      - 5005:5005
+  actions_server:
+    image: rasa_assistant:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: bash -c "rasa run actions"
+    env_file:
+      - creds.env
+    ports:
+      - 5055:5055
