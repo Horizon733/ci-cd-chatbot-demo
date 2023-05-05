@@ -1,0 +1,24 @@
+version: "3.1"
+
+nlu:
+  - intent: search_product
+    examples: |
+      - Can you help me find a [DKNY](brand) [Unisex](gender) [Black & Grey Printed Medium Trolley Bag](product) product?
+      - Can you show me [Men](gender) [Casual Shirt](product)
+      - What categories of products do you offer?
+      - Do you have any new arrivals?
+      - show me [Casual Shirt](product) under [Rs 900]{"entity": "amount-of-money", "role": "max"}?
+      - search products above [Rs 1000]{"entity": "amount-of-money", "role": "min"}?
+      - Can you suggest products for [Michael Kors](brand)?
+      - What are the best-selling products in [Trousers](product)?
+      - Can I search for products for [Gap](brand)?
+      - i want to buy a [Parfum](product) which is above [Rs 1000]{"entity": "amount-of-money", "role": "min"} and under [Rs 3000]{"entity": "amount-of-money", "role": "max"}
+
+  - intent: add_to_cart
+    examples: |
+      - please add this to cart
+      - can you add this product to cart
+      - add to cart
+      - I want to add this to cart
+      - Can you help me put this product in my shopping cart?
+      - add item to the cart

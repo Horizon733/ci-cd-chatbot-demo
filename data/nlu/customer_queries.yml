@@ -1,0 +1,63 @@
+version: "3.1"
+
+nlu:
+- intent: faq/payment_methods
+  examples: |
+    - What payment methods do you accept?
+    - Can I pay with a credit card?
+    - Is PayPal an option for payment?
+    - What is your preferred payment method?
+    - Can I pay with a gift card?
+    - How do I update my payment method?
+    - Can I use multiple payment methods?
+    - Is there a payment plan available?
+    - How do I make a payment?
+    - What happens if my payment is declined?
+- intent: faq/shipping_costs
+  examples: |
+    - How much does shipping cost?
+    - Are there any shipping fees?
+    - What are your shipping rates?
+    - Can I get free shipping?
+    - How do I qualify for free shipping?
+    - What is the shipping cost for international orders?
+    - How do you calculate shipping costs?
+    - Are there any discounts on shipping?
+    - How long does shipping take?
+    - How can I track my package?
+- intent: faq/shipping_duration
+  examples: |
+    - How long does shipping take?
+    - When can I expect my order to arrive?
+    - What is the estimated delivery time?
+    - Can I expedite my shipping?
+    - How can I track my package?
+    - Is there a shipping schedule?
+    - What is the shipping time for international orders?
+    - How long does it take to process an order?
+    - How long does it take to ship from your warehouse?
+    - Can I change my shipping address?
+- intent: faq/return_cancellation_policy
+  examples: |
+    - What is your return policy?
+    - How do I return an item?
+    - Can I exchange an item?
+    - What is your cancellation policy?
+    - How do I cancel an order?
+    - How do I get a refund?
+    - What is your refund policy?
+    - How long does it take to process a return?
+    - Can I return an item in-store?
+    - Are there any restocking fees?
+- intent: faq/customer_support
+  examples: |
+    - How can I contact customer support?
+    - What are your customer support hours?
+    - Can I chat with a customer support representative?
+    - How do I speak to a customer support representative?
+    - Is there a phone number I can call?
+    - How long does it take for customer support to respond?
+    - Can I email customer support?
+    - What is the best way to contact customer support?
+    - Can customer support help me with a technical issue?
+    - Can I track my customer support ticket?

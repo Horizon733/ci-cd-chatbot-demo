@@ -5,29 +5,187 @@ intents:
   - goodbye
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+  - search_product
+  - add_to_cart
+  - out_of_scope
+  - faq
+  - react_positive
+  - react_negative
+  - EXTERNAL_feedback_reminder
+
+entities:
+- email
+- number
+- amount-of-money
+- product
+- brand
+
+slots:
+  email:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: email
+      conditions:
+      - requested_slot: email
+        active_loop: login_form
+  otp:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: number
+      conditions:
+      - requested_slot: otp
+        active_loop: login_form
+  price_min:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: amount-of-money
+      role: min
+  price_max:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: amount-of-money
+      role: max
+  brand:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: brand
+  product:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: product
+  filter_category:
+    type: categorical
+    influence_conversation: false
+    values:
+      - brand
+      - product name
+      - price
+      - brand and price
+    mappings:
+     - type: custom
+  is_login:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+  feedback:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_intent
+        intent: affirm
+        value: yes
+        conditions:
+          - requested_slot: feedback
+            active_loop: feedback_form
+      - type: from_intent
+        intent: deny
+        value: no
+        conditions:
+          - requested_slot: feedback
+            active_loop: feedback_form
+  name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - requested_slot: name
+            active_loop: feedback_form
+  feedback_message:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - requested_slot: feedback_message
+            active_loop: feedback_form
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+  - buttons:
+    - title: Search product
+      payload: Search product
+    - title: Show my cart
+      payload: Show my cart
+    - title: Return product
+      payload: Return product
+    text: "Hi, I am your ecommerce assistant, I can help you with following queries."
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+  utter_ask_email:
+    - text: "Please share your email id."
 
-  utter_did_that_help:
-  - text: "Did that help you?"
+  utter_ask_name:
+    - text: "Can you please share your name?"
 
-  utter_happy:
-  - text: "Great, carry on!"
+  utter_ask_feedback_message:
+    - buttons:
+      - title: 😍
+        payload: good
+      - title: 😞
+        payload: bad
+      text: "How would you rate your conversation?"
 
-  utter_goodbye:
-  - text: "Bye"
+  utter_ask_feedback:
+    - text: "Would you mind to share a feedback for your conversation?"
 
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  utter_otp:
+    - text: "Can you please share otp sent to your mail id?"
+
+  utter_thanks:
+    - text: "Thanks for your feedback!"
+
+  utter_ask_filter_category:
+    - buttons:
+      - title: Brand
+        payload: brand
+      - title: Product name
+        payload: product name
+      - title: Price
+        payload: price
+      - title: Brand and Price
+        payload: brand and price
+      text: How would you like to search the product?
+
+actions:
+  - action_ask_otp
+  - action_search_product
+  - action_show_product
+  - validate_product_search_form
+  - validate_login_form
+  - validate_feedback_form
+
+forms:
+  login_form:
+    required_slots:
+      - email
+      - otp
+  return_order_form:
+    required_slots:
+      - order_id
+      - address
+      - phone_number
+      - confirm_details
+  product_search_form:
+    required_slots:
+      - filter_category
+  feedback_form:
+    required_slots:
+      - feedback
+      - name
+      - feedback_message
 
 session_config:
   session_expiration_time: 60

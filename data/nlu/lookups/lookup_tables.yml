@@ -1,0 +1,10 @@
+version: '3.1'
+
+nlu:
+  - lookup: gender
+    examples: |
+      - Men
+      - Women
+      - Unisex
+      - Boys
+      - Girls

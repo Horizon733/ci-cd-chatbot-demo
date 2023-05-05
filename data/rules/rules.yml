@@ -1,0 +1,34 @@
+version: "3.1"
+
+rules:
+
+- rule: faq
+  steps:
+    - intent: faq
+    - action: utter_faq
+
+- rule: product search form - Deactivate
+  condition:
+  - active_loop: product_search_form
+  steps:
+    - action: product_search_form
+    - active_loop: product_search_form
+    - active_loop: null
+    - action: action_show_product
+
+- rule: feedback reminder
+  condition:
+  - active_loop: null
+  steps:
+    - action: EXTERNAL_feedback_reminder
+    - action: feedback_form
+    - active_loop: feedback_form
+
+- rule: feedback form - deactivate
+  condition:
+  - active_loop: feedback_form
+  steps:
+    - action: feedback_form
+    - active_loop: feedback_form
+    - active_loop: null
+    - action: utter_thanks

@@ -1,3 +1,7 @@
+# misc
+/test.py
+/cred.*
+
 # rasa
 /models/
 /.rasa/
