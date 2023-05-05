@@ -5,6 +5,7 @@ from rasa_sdk.events import FollowupAction, SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 
 from actions.constants import *
+from actions.database_utils.queries import insert_user_data
 from actions.utils import *
 
 
@@ -60,3 +61,22 @@ class ActionAskOtp(Action):
         dispatcher.utter_message(response="utter_otp")
 
         return [SlotSet(OTP, otp)]
+
+
+class ActionLogin(Action):
+
+    def name(self) -> Text:
+        return "action_login"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return_values = []
+        email = tracker.get_slot(EMAIL)
+        is_login = insert_user_data(tracker.sender_id, email, "users")
+        if is_login:
+            return_values.append(SlotSet(IS_LOGIN, True))
+            dispatcher.utter_message(response="utter_login_success")
+        else:
+            dispatcher.utter_message(response="utter_login_failed")
+        return return_values

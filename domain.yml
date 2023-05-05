@@ -11,6 +11,8 @@ intents:
   - faq
   - react_positive
   - react_negative
+  - login
+  - checkout
   - EXTERNAL_feedback_reminder
 
 entities:
@@ -120,8 +122,8 @@ responses:
       payload: Search product
     - title: Show my cart
       payload: Show my cart
-    - title: Return product
-      payload: Return product
+    - title: Checkout
+      payload: Checkout
     text: "Hi, I am your ecommerce assistant, I can help you with following queries."
 
   utter_ask_email:
@@ -159,6 +161,13 @@ responses:
         payload: brand and price
       text: How would you like to search the product?
 
+  utter_login_success:
+    - text: "You have been logged in"
+  utter_login_failed:
+    - text: "Sorry, I was not able to login you, please try again later."
+  utter_feedback_end:
+    - text: "Sure, no problem"
+
 actions:
   - action_ask_otp
   - action_search_product
@@ -172,11 +181,10 @@ forms:
     required_slots:
       - email
       - otp
-  return_order_form:
+  checkout_form:
     required_slots:
-      - order_id
+      - items
       - address
-      - phone_number
       - confirm_details
   product_search_form:
     required_slots:

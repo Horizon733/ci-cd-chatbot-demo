@@ -20,7 +20,7 @@ rules:
   condition:
   - active_loop: null
   steps:
-    - action: EXTERNAL_feedback_reminder
+    - intent: EXTERNAL_feedback_reminder
     - action: feedback_form
     - active_loop: feedback_form
 
@@ -32,3 +32,20 @@ rules:
     - active_loop: feedback_form
     - active_loop: null
     - action: utter_thanks
+
+- rule: login form - activate
+  condition:
+  - active_loop: null
+  steps:
+    - intent: login
+    - action: login_form
+    - active_loop: login_form
+
+- rule: login form - deactivate
+  condition:
+  - active_loop: login_form
+  steps:
+    - action: login_form
+    - active_loop: login_form
+    - active_loop: null
+    - action: action_login
